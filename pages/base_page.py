@@ -1,3 +1,5 @@
+import math
+
 from selenium.webdriver.remote.webdriver import WebDriver
 
 
@@ -17,3 +19,13 @@ class BasePage:
             return False
         return True
 
+    def solve_alert_and_get_code(self):
+        alert = self.browser.switch_to.alert
+        x = alert.text.split(" ")[2]
+        answer = str(math.log10(abs(12*math.sin(float(x)))))
+        alert.send_keys(answer)
+        alert.accept()
+        alert = self.browser.switch_to.alert
+        text = alert.text
+        print(text)
+        alert.accept()

@@ -16,6 +16,7 @@ def browser(request):
         browser = webdriver.Edge()
     else:
         options = Options()
+        options.page_load_strategy = 'normal'
         options.add_experimental_option("prefs", {"intl.accept_languages": request.config.getoption("language")})
         browser = webdriver.Chrome(options=options)
     yield browser
